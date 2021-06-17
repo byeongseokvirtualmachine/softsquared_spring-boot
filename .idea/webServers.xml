@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5ef4164c-7aa7-44d6-b0e4-9f28b6e817c7" name="spring_edu" url="https://www.dhsmfdmlehapdls.shop">
+        <fileTransfer rootFolder="/var/www/softsquared_spring-boot" accessType="SFTP" host="13.125.219.239" port="22" sshConfigId="b52d90ce-09bb-4748-a8c6-9d1bbe40b642" sshConfig="ubuntu@13.125.219.239:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

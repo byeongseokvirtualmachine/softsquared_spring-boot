@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="13.125.219.239" id="b52d90ce-09bb-4748-a8c6-9d1bbe40b642" keyPath="C:\Program Files (x86)\WinSCP\PuTTY\rp3_d.ppk" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" />
+    </configs>
+  </component>
+</project>
