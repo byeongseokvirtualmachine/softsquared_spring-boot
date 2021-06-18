@@ -51,16 +51,16 @@ public class UserService {
             throw new BaseException(PASSWORD_ENCRYPTION_ERROR);
         }
         try{
-            int userIdx = userDao.createUser(postUserReq);
+            int userId = userDao.createUser(postUserReq);
             //jwt 발급.
-            String jwt = jwtService.createJwt(userIdx);
-            return new PostUserRes(jwt,userIdx);
+            String jwt = jwtService.createJwt(userId);
+            return new PostUserRes(jwt,userId);
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public void modifyUserName(PatchUserReq patchUserReq) throws BaseException {
+    public void modifyUserName(PatchUserNameReq patchUserReq) throws BaseException {
         try{
             int result = userDao.modifyUserName(patchUserReq);
             if(result == 0){
