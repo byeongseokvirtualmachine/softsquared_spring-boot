@@ -20,26 +20,24 @@ public class UserDao {
     }
 
     public List<GetUserRes> getUsers(){
-        String getUsersQuery = "select * from UserInfo";
+        String getUsersQuery = "select * from User";
         return this.jdbcTemplate.query(getUsersQuery,
                 (rs,rowNum) -> new GetUserRes(
-                        rs.getInt("userIdx"),
+                        rs.getInt("userId"),
                         rs.getString("userName"),
-                        rs.getString("ID"),
                         rs.getString("Email"),
                         rs.getString("password"))
                 );
     }
 
     public List<GetUserRes> getUsersByEmail(String email){
-        String getUsersByEmailQuery = "select * from UserInfo where email =?";
+        String getUsersByEmailQuery = "select * from User where email =?";
         String getUsersByEmailParams = email;
         return this.jdbcTemplate.query(getUsersByEmailQuery,
                 (rs, rowNum) -> new GetUserRes(
-                        rs.getInt("userIdx"),
+                        rs.getInt("userId"),
                         rs.getString("userName"),
-                        rs.getString("ID"),
-                        rs.getString("Email"),
+                        rs.getString("email"),
                         rs.getString("password")),
                 getUsersByEmailParams);
     }
@@ -49,9 +47,8 @@ public class UserDao {
         int getUserParams = userIdx;
         return this.jdbcTemplate.queryForObject(getUserQuery,
                 (rs, rowNum) -> new GetUserRes(
-                        rs.getInt("userIdx"),
+                        rs.getInt("userId"),
                         rs.getString("userName"),
-                        rs.getString("ID"),
                         rs.getString("Email"),
                         rs.getString("password")),
                 getUserParams);
@@ -59,8 +56,8 @@ public class UserDao {
     
 
     public int createUser(PostUserReq postUserReq){
-        String createUserQuery = "insert into UserInfo (userName, ID, password, email) VALUES (?,?,?,?)";
-        Object[] createUserParams = new Object[]{postUserReq.getUserName(), postUserReq.getId(), postUserReq.getPassword(), postUserReq.getEmail()};
+        String createUserQuery = "insert into User (userName, email, password) VALUES (?,?,?)";
+        Object[] createUserParams = new Object[]{postUserReq.getUserName(), postUserReq.getEmail(), postUserReq.getPassword()};
         this.jdbcTemplate.update(createUserQuery, createUserParams);
 
         String lastInserIdQuery = "select last_insert_id()";
@@ -75,28 +72,26 @@ public class UserDao {
                 checkEmailParams);
 
     }
-
-    public int modifyUserName(PatchUserReq patchUserReq){
-        String modifyUserNameQuery = "update UserInfo set userName = ? where userIdx = ? ";
-        Object[] modifyUserNameParams = new Object[]{patchUserReq.getUserName(), patchUserReq.getUserIdx()};
+// 근데 이름을 바꾸려면 먼저 검증이 필요한데
+    public int modifyUserName(PatchUserNameReq patchUserNameReq){
+        String modifyUserNameQuery = "update User set userName = ? where userId = ? ";
+        Object[] modifyUserNameParams = new Object[]{patchUserNameReq.getUserId(),patchUserNameReq.getUserName()};
 
         return this.jdbcTemplate.update(modifyUserNameQuery,modifyUserNameParams);
     }
 
     public User getPwd(PostLoginReq postLoginReq){
-        String getPwdQuery = "select userIdx, password,email,userName,ID from UserInfo where ID = ?";
-        String getPwdParams = postLoginReq.getId();
+        String getPwdQuery = "select password from User where userId = ?";
+        String getPwdParams = postLoginReq.getUserId();
 
         return this.jdbcTemplate.queryForObject(getPwdQuery,
                 (rs,rowNum)-> new User(
-                        rs.getInt("userIdx"),
-                        rs.getString("ID"),
+                        rs.getInt("userId"),
                         rs.getString("userName"),
-                        rs.getString("password"),
-                        rs.getString("email")
+                        rs.getString("email"),
+                        rs.getString("password")
                 ),
-                getPwdParams
-                );
+                getPwdParams);
 
     }
 
