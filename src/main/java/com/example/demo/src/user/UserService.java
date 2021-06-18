@@ -60,9 +60,9 @@ public class UserService {
         }
     }
 
-    public void modifyUserName(PatchUserNameReq patchUserReq) throws BaseException {
+    public void modifyUserName(PatchUserNameReq patchUserNameReq) throws BaseException {
         try{
-            int result = userDao.modifyUserName(patchUserReq);
+            int result = userDao.modifyUserName(patchUserNameReq);
             if(result == 0){
                 throw new BaseException(MODIFY_FAIL_USERNAME);
             }

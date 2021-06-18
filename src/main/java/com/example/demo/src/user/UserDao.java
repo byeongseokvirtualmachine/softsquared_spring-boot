@@ -56,7 +56,7 @@ public class UserDao {
     
 
     public int createUser(PostUserReq postUserReq){
-        String createUserQuery = "insert into UserInfo (userName, email, password) VALUES (?,?,?)";
+        String createUserQuery = "insert into User (userName, email, password) VALUES (?,?,?)";
         Object[] createUserParams = new Object[]{postUserReq.getUserName(), postUserReq.getEmail(), postUserReq.getPassword()};
         this.jdbcTemplate.update(createUserQuery, createUserParams);
 
@@ -73,9 +73,9 @@ public class UserDao {
 
     }
 // 근데 이름을 바꾸려면 먼저 검증이 필요한데
-    public int modifyUserName(PatchUserReq patchUserReq){
-        String modifyUserNameQuery = "update UserInfo set userName = ? where userId = ? ";
-        Object[] modifyUserNameParams = new Object[]{patchUserReq.getUserName(), patchUserReq.getUserId()};
+    public int modifyUserName(PatchUserNameReq patchUserNameReq){
+        String modifyUserNameQuery = "update User set userName = ? where userId = ? ";
+        Object[] modifyUserNameParams = new Object[]{patchUserNameReq.getUserId(),patchUserNameReq.getUserName()};
 
         return this.jdbcTemplate.update(modifyUserNameQuery,modifyUserNameParams);
     }
