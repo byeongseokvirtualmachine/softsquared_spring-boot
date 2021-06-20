@@ -41,15 +41,15 @@ public class UserProvider {
         }
     }
 
-    public List<GetUserRes> getUsersByEmail(String email) throws BaseException{
-        try{
-            List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
-            return getUsersRes;
-        }
-        catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-                    }
+//    public List<GetUserRes> getUsersByEmail(String email) throws BaseException{
+//        try{
+//            List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
+//            return getUsersRes;
+//        }
+//        catch (Exception exception) {
+//            throw new BaseException(DATABASE_ERROR);
+//        }
+//    }
 
 
     public GetUserRes getUser(int userId) throws BaseException {
@@ -61,32 +61,32 @@ public class UserProvider {
         }
     }
 
-    public int checkEmail(String email) throws BaseException{
-        try{
-            return userDao.checkEmail(email);
-        } catch (Exception exception){
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
+//    public int checkEmail(String email) throws BaseException{
+//        try{
+//            return userDao.checkEmail(email);
+//        } catch (Exception exception){
+//            throw new BaseException(DATABASE_ERROR);
+//        }
+//    }
 
-    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException{
-        User user = userDao.getPwd(postLoginReq);
-        String password;
-        try {
-            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword());
-        } catch (Exception ignored) {
-            throw new BaseException(PASSWORD_DECRYPTION_ERROR);
-        }
-
-        if(postLoginReq.getPassword().equals(password)){
-            int userId = userDao.getPwd(postLoginReq).getUserId();
-            String jwt = jwtService.createJwt(userId);
-            return new PostLoginRes(userId,jwt);
-        }
-        else{
-            throw new BaseException(FAILED_TO_LOGIN);
-        }
-
-    }
+//    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException{
+//        User user = userDao.getPwd(postLoginReq);
+//        String password;
+//        try {
+//            password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword());
+//        } catch (Exception ignored) {
+//            throw new BaseException(PASSWORD_DECRYPTION_ERROR);
+//        }
+//
+//        if(postLoginReq.getPassword().equals(password)){
+//            int userId = userDao.getPwd(postLoginReq).getUserId();
+//            String jwt = jwtService.createJwt(userId);
+//            return new PostLoginRes(userId,jwt);
+//        }
+//        else{
+//            throw new BaseException(FAILED_TO_LOGIN);
+//        }
+//
+//    }
 
 }

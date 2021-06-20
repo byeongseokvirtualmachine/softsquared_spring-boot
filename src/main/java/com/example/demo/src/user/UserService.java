@@ -1,7 +1,6 @@
 package com.example.demo.src.user;
 
 
-
 import com.example.demo.config.BaseException;
 import com.example.demo.config.secret.Secret;
 import com.example.demo.src.user.model.*;
@@ -24,50 +23,50 @@ public class UserService {
 
     private final UserDao userDao;
     private final UserProvider userProvider;
-    private final JwtService jwtService;
+//    private final JwtService jwtService;
 
 
     @Autowired
     public UserService(UserDao userDao, UserProvider userProvider, JwtService jwtService) {
         this.userDao = userDao;
         this.userProvider = userProvider;
-        this.jwtService = jwtService;
+//        this.jwtService = jwtService;
 
     }
 
     //POST
-    public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
-        //중복
-        if(userProvider.checkEmail(postUserReq.getEmail()) ==1){
-            throw new BaseException(POST_USERS_EXISTS_EMAIL);
-        }
+//    public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
+//        //중복
+//        if(userProvider.checkEmail(postUserReq.getEmail()) ==1){
+//            throw new BaseException(POST_USERS_EXISTS_EMAIL);
+//        }
+//
+//        String pwd;
+//        try{
+//            //암호화
+//            pwd = new AES128(Secret.USER_INFO_PASSWORD_KEY).encrypt(postUserReq.getPassword());
+//            postUserReq.setPassword(pwd);
+//        } catch (Exception ignored) {
+//            throw new BaseException(PASSWORD_ENCRYPTION_ERROR);
+//        }
+//        try{
+//            int userId = userDao.createUser(postUserReq);
+//            //jwt 발급.
+//            String jwt = jwtService.createJwt(userId);
+//            return new PostUserRes(jwt,userId);
+//        } catch (Exception exception) {
+//            throw new BaseException(DATABASE_ERROR);
+//        }
+//    }
 
-        String pwd;
-        try{
-            //암호화
-            pwd = new AES128(Secret.USER_INFO_PASSWORD_KEY).encrypt(postUserReq.getPassword());
-            postUserReq.setPassword(pwd);
-        } catch (Exception ignored) {
-            throw new BaseException(PASSWORD_ENCRYPTION_ERROR);
-        }
-        try{
-            int userId = userDao.createUser(postUserReq);
-            //jwt 발급.
-            String jwt = jwtService.createJwt(userId);
-            return new PostUserRes(jwt,userId);
-        } catch (Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
-
-    public void modifyUserName(PatchUserNameReq patchUserNameReq) throws BaseException {
-        try{
-            int result = userDao.modifyUserName(patchUserNameReq);
-            if(result == 0){
-                throw new BaseException(MODIFY_FAIL_USERNAME);
-            }
-        } catch(Exception exception){
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
+//    public void modifyUserName(PatchUserNameReq patchUserNameReq) throws BaseException {
+//        try{
+//            int result = userDao.modifyUserName(patchUserNameReq);
+//            if(result == 0){
+//                throw new BaseException(MODIFY_FAIL_USERNAME);
+//            }
+//        } catch(Exception exception){
+//            throw new BaseException(DATABASE_ERROR);
+//        }
+//    }
 }
