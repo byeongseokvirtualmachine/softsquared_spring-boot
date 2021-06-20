@@ -19,12 +19,10 @@ public class TestService {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final TestDao testDao;
     private final TestProvider testProvider;
 
     @Autowired
     public TestService(TestDao testDao, TestProvider testProvider) {
-        this.testDao = testDao;
         this.testProvider = testProvider;
 
     }
