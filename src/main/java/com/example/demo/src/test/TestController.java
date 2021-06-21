@@ -30,16 +30,16 @@ public class TestController {
 
 
     @ResponseBody
-    @GetMapping("/{userId}") // (GET) 127.0.0.1:9000/test1/:userId
+    @GetMapping("/{userId}") // (GET) 127.0.0.1:9000/app/test/:userId
     public BaseResponse<GetTestRes> getTest(@PathVariable("userId") int userId) {
         System.out.println("userId 확인 : " + userId);
-        System.out.println("BaseResponse<>(getTestRes) : " + getTest(userId));
         // Get Users
         try {
             GetTestRes getTestRes = testProvider.getTest(userId);
             System.out.println("getTestRes : " + getTestRes);
             return new BaseResponse<>(getTestRes);
         } catch (BaseException exception) {
+            exception.printStackTrace();
             return new BaseResponse<>((exception.getStatus()));
         }
 

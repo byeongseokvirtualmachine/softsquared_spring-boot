@@ -1,6 +1,4 @@
 package com.example.demo.src.test;
-
-
 import com.example.demo.config.BaseException;
 import com.example.demo.config.secret.Secret;
 import com.example.demo.src.test.model.*;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.*;
-
 //Provider : Read의 비즈니스 로직 처리
 @Service
 public class TestProvider {
@@ -30,8 +27,11 @@ public class TestProvider {
     public List<GetTestRes> getTest() throws BaseException {
         try {
             List<GetTestRes> getTestRes = testDao.getTest();
+            System.out.println("getTestRes : " + getTestRes);
+
             return getTestRes;
         } catch (Exception exception) {
+            System.out.println("Provider exception.printStackTrace(): " + exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
@@ -41,6 +41,8 @@ public class TestProvider {
             GetTestRes getTestRes = testDao.getTest(userId);
             return getTestRes;
         } catch (Exception exception) {
+            System.out.println("exception.printStackTrace(): " + exception);
+            exception.printStackTrace();
             throw new BaseException(DATABASE_ERROR);
         }
     }

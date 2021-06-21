@@ -37,76 +37,76 @@ public class UserController {
     }
 
     /**
-     * 나중에 닉네임을 바꾸고 싶을 때, 중복이 되는지 안되는지 확인
-     * [GET] /
+     * 회원 조회 API
+     * [GET] /users
      * 회원 번호 및 이메일 검색 조회 API
      * [GET] /users? Email=
      * @return BaseResponse<List<GetUserRes>>
      */
     //Query String
-//    @ResponseBody
-//    @GetMapping("") // (GET) 127.0.0.1:9000/
-//    public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String Email) {
-//        try{
-//            if(Email == null){
-//                List<GetUserRes> getUsersRes = userProvider.getUsers();
-//                return new BaseResponse<>(getUsersRes);
-//            }
-//            // Get Users
-//            List<GetUserRes> getUsersRes = userProvider.getUsersByEmail(Email);
-//            return new BaseResponse<>(getUsersRes);
-//        } catch(BaseException exception){
-//            return new BaseResponse<>((exception.getStatus()));
-//        }
-//    }
+    @ResponseBody
+    @GetMapping("") // (GET) 127.0.0.1:9000/app/users
+    public BaseResponse<List<GetUserRes>> getUsers(@RequestParam(required = false) String Email) {
+        try{
+            if(Email == null){
+                List<GetUserRes> getUsersRes = userProvider.getUsers();
+                return new BaseResponse<>(getUsersRes);
+            }
+            // Get Users
+            List<GetUserRes> getUsersRes = userProvider.getUsersByEmail(Email);
+            return new BaseResponse<>(getUsersRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
 
     /**
      * 회원 1명 조회 API
-     * [GET] /app/users/:userIdx
+     * [GET] /users/:userIdx
      * @return BaseResponse<GetUserRes>
      */
     // Path-variable
     @ResponseBody
-    @GetMapping("/{userId}") // (GET) 127.0.0.1:9000/users/:userId
+    @GetMapping("/{userId}") // (GET) 127.0.0.1:9000/app/users/:userIdx
     public BaseResponse<GetUserRes> getUser(@PathVariable("userId") int userId) {
         // Get Users
         try{
             GetUserRes getUserRes = userProvider.getUser(userId);
+            System.out.println("UserController getUserRes : " + getUserRes);
             return new BaseResponse<>(getUserRes);
         } catch(BaseException exception){
             return new BaseResponse<>((exception.getStatus()));
         }
-
     }
-
     /**
      * 회원가입 API
      * [POST] /users
      * @return BaseResponse<PostUserRes>
      */
     // Body
-//    @ResponseBody
-//    @PostMapping("/register")
-//    public BaseResponse<PostUserRes> createUser(@RequestBody PostUserReq postUserReq) {
-//        // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
-//        if(postUserReq.getPassword() == null){
-//            return new BaseResponse<>(POST_USERS_EMPTY_PASSWORD);
-//        }
-//        if(postUserReq.getEmail() == null){
-//            return new BaseResponse<>(POST_USERS_EMPTY_EMAIL);
-//        }
-//        //이메일 정규표현
-//        if(!isRegexEmail(postUserReq.getEmail())){
-//            return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
-//        }
-//        try{
-//            PostUserRes postUserRes = userService.createUser(postUserReq);
-//            return new BaseResponse<>(postUserRes);
-//        } catch(BaseException exception){
-//            return new BaseResponse<>((exception.getStatus()));
-//        }
-//
-//    }
+    @ResponseBody
+    @PostMapping("/register")
+    public BaseResponse<PostUserRes> createUser(@RequestBody PostUserReq postUserReq) {
+        // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
+        if(postUserReq.getPassword() == null){
+            return new BaseResponse<>(POST_USERS_EMPTY_PASSWORD);
+        }
+        if(postUserReq.getEmail() == null){
+            return new BaseResponse<>(POST_USERS_EMPTY_EMAIL);
+        }
+        //이메일 정규표현
+        if(!isRegexEmail(postUserReq.getEmail())){
+            return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
+        }
+        try{
+            PostUserRes postUserRes = userService.createUser(postUserReq);
+            return new BaseResponse<>(postUserRes);
+        } catch(BaseException exception){
+            return new BaseResponse<>((exception.getStatus()));
+        }
+
+    }
     /**
      * 로그인 API
      * [POST] /users/logIn
@@ -127,7 +127,7 @@ public class UserController {
 
     /**
      * 유저정보변경 API
-     * [PATCH] /users/:userIdx
+     * [PATCH] /users/:userId
      * @return BaseResponse<String>
      */
 //    @ResponseBody

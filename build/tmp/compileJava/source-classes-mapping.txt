@@ -2,8 +2,6 @@ com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
-com/example/demo/src/user/model/PatchUserNameRes.java
- com.example.demo.src.user.model.PatchUserNameRes
 com/example/demo/src/test/model/Test.java
  com.example.demo.src.test.model.Test
 com/example/demo/src/test/model/GetTestRes.java
@@ -24,8 +22,6 @@ com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
 com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
-com/example/demo/src/user/model/PatchUserNameReq.java
- com.example.demo.src.user.model.PatchUserNameReq
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
 com/example/demo/src/test/TestDao.java
@@ -36,8 +32,8 @@ com/example/demo/src/test/TestService.java
  com.example.demo.src.test.TestService
 com/example/demo/src/user/model/PostUserRes.java
  com.example.demo.src.user.model.PostUserRes
-com/example/demo/src/user/UserController.java
- com.example.demo.src.user.UserController
+com/example/demo/src/test/TestProvider.java
+ com.example.demo.src.test.TestProvider
 com/example/demo/config/BaseResponse.java
  com.example.demo.config.BaseResponse
 com/example/demo/src/user/model/User.java
@@ -54,5 +50,5 @@ com/example/demo/utils/JwtService.java
  com.example.demo.utils.JwtService
 com/example/demo/src/user/UserProvider.java
  com.example.demo.src.user.UserProvider
-com/example/demo/src/test/TestProvider.java
- com.example.demo.src.test.TestProvider
+com/example/demo/src/user/UserController.java
+ com.example.demo.src.user.UserController

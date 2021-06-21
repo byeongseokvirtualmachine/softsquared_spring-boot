@@ -41,33 +41,35 @@ public class UserProvider {
         }
     }
 
-//    public List<GetUserRes> getUsersByEmail(String email) throws BaseException{
-//        try{
-//            List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
-//            return getUsersRes;
-//        }
-//        catch (Exception exception) {
-//            throw new BaseException(DATABASE_ERROR);
-//        }
-//    }
+    public List<GetUserRes> getUsersByEmail(String email) throws BaseException{
+        try{
+            List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
+            return getUsersRes;
+        }
+        catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 
 
     public GetUserRes getUser(int userId) throws BaseException {
         try {
             GetUserRes getUserRes = userDao.getUser(userId);
+            System.out.println("UserProvider getUserRes : " + getUserRes);
             return getUserRes;
         } catch (Exception exception) {
+            System.out.println("Provider exception.printStackTrace(): " + exception);
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-//    public int checkEmail(String email) throws BaseException{
-//        try{
-//            return userDao.checkEmail(email);
-//        } catch (Exception exception){
-//            throw new BaseException(DATABASE_ERROR);
-//        }
-//    }
+    public int checkEmail(String email) throws BaseException{
+        try{
+            return userDao.checkEmail(email);
+        } catch (Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 
 //    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException{
 //        User user = userDao.getPwd(postLoginReq);

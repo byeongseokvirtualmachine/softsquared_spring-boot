@@ -29,7 +29,7 @@ public class TestDao {
     }
 
     public GetTestRes getTest(int userId) {
-        String getTestQuery = "select * from Test where userId = ?";
+        String getTestQuery = "select userId, data from Test where userId = ?";
         int getTestParams = userId;
         return this.jdbcTemplate.queryForObject(getTestQuery,
                 (rs, rowNum) -> new GetTestRes(
