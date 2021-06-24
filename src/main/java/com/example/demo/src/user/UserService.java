@@ -46,28 +46,37 @@ public class UserService {
         try{
             //암호화
             pwd = new AES128(Secret.USER_INFO_PASSWORD_KEY).encrypt(postUserReq.getPassword());
+            System.out.println("UserService pwd : " + pwd);
             postUserReq.setPassword(pwd);
         } catch (Exception ignored) {
             throw new BaseException(PASSWORD_ENCRYPTION_ERROR);
         }
-        try{
+        try {
             int userId = userDao.createUser(postUserReq);
             //jwt 발급.
             String jwt = jwtService.createJwt(userId);
-            return new PostUserRes(jwt,userId);
+            System.out.println("User Service jwt : " + jwt);
+            System.out.println("User Service userId : " + userId);
+            PostUserRes PUR= new PostUserRes(userId,jwt);
+            System.out.println("UserService PostUserRes(jwt, userId) : " + PUR);
+            return PUR; // 그냥 값을 보고 싶어서 생성한 PUR.
         } catch (Exception exception) {
+            System.out.println("UserService exception.printStackTrace() : ");
+            System.out.print("that's no error message.");
+            exception.printStackTrace();
+            System.out.println("UserService exception.printStackTrace() done.");
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-//    public void modifyUserName(PatchUserNameReq patchUserNameReq) throws BaseException {
-//        try{
-//            int result = userDao.modifyUserName(patchUserNameReq);
-//            if(result == 0){
-//                throw new BaseException(MODIFY_FAIL_USERNAME);
-//            }
-//        } catch(Exception exception){
-//            throw new BaseException(DATABASE_ERROR);
-//        }
-//    }
+    public void modifyUserName(PatchUserNameReq patchUserNameReq) throws BaseException {
+        try{
+            int result = userDao.modifyUserName(patchUserNameReq);
+            if(result == 0){
+                throw new BaseException(MODIFY_FAIL_USERNAME);
+            }
+        } catch(Exception exception){
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
 }

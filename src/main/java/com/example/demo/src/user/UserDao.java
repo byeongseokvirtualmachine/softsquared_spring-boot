@@ -1,6 +1,7 @@
 package com.example.demo.src.user;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.example.demo.src.user.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -49,7 +50,7 @@ public class UserDao {
                         rs.getString("phone"),
                         rs.getString("email"),
                         rs.getString("password"))
-                );
+        );
 
     }
 
@@ -72,12 +73,12 @@ public class UserDao {
 
 
     public int createUser(PostUserReq postUserReq) {
-        String createUserQuery = "insert into User (userName, userId, password, email) VALUES (?,?,?,?)";
-        Object[] createUserParams = new Object[]{postUserReq.getUserName(), postUserReq.getUserId(), postUserReq.getPassword(), postUserReq.getEmail()};
+        String createUserQuery = "insert into User (userId, userName, userTag, email, password) VALUES (?, ?, ?, ?, ?)";
+        Object[] createUserParams = new Object[]{postUserReq.getUserId(), postUserReq.getUserName(), postUserReq.getUserTag(), postUserReq.getEmail(), postUserReq.getPassword()};
         this.jdbcTemplate.update(createUserQuery, createUserParams);
 
-        String lastInserIdQuery = "select last_insert_id()";
-        return this.jdbcTemplate.queryForObject(lastInserIdQuery, int.class);
+        String lastInsertUserIdQuery = "select last_insert_id()";
+        return this.jdbcTemplate.queryForObject(lastInsertUserIdQuery, int.class);
     }
 
     public int checkEmail(String email) {
@@ -89,33 +90,43 @@ public class UserDao {
 
     }
 
-    public int modifyUserName(PatchUserReq patchUserReq) {
+//    public int checkUserTag(String userTag){
+//        String checkUserTagQuery = "select ";
+//
+//        return this.jdbcTemplate.queryForObject(checkUserTagQuery, int.class, checkUserTagParams)
+//    }
+
+    public int modifyUserName(PatchUserNameReq patchUserNameReq) {
         String modifyUserNameQuery = "update User set userName = ? where userId = ? ";
-        Object[] modifyUserNameParams = new Object[]{patchUserReq.getUserName(), patchUserReq.getUserId()};
+        Object[] modifyUserNameParams = new Object[]{patchUserNameReq.getUserName(), patchUserNameReq.getUserId()};
 
         return this.jdbcTemplate.update(modifyUserNameQuery, modifyUserNameParams);
     }
 
-//    public User getPwd(PostLoginReq postLoginReq) {
-//        String getPwdQuery = "select userId, password,email,userName from User where ID = ?";
-//        String getPwdParams = postLoginReq.getUserId();
-//
-//        return this.jdbcTemplate.queryForObject(getPwdQuery,
-//                (rs, rowNum) -> new User(
-//                        rs.getInt("userId"),
-//                        rs.getString("status"),
-//                        rs.getString("userName"),
-//                        rs.getString("userTag"),
-//                        rs.getString("flagOnOff"),
-//                        rs.getString("profileImageUrl"),
-//                        rs.getString("phone"),
-//                        rs.getString("email"),
-//                        rs.getString("password")
-//                ),
-//                getPwdParams
-//                );
-//
-//    }
+    public User getPwd(PostLoginReq postLoginReq) {
+        System.out.println("UserDao getPwd : start");
+        System.out.println("postLoginReq : " + postLoginReq);
+        String getPwdQuery = "SELECT userId, status, userName, userTag, flagOnOff, profileImageUrl, phone, email, password, nitro FROM User WHERE email = ?";
+        String getPwdParams = postLoginReq.getEmail();
+        System.out.println("getPwdQuery : " + getPwdQuery);
+        System.out.println("getPwdParams : " + getPwdParams);
+
+        return this.jdbcTemplate.queryForObject(getPwdQuery,
+                (rs, rowNum) -> new User(
+                        rs.getInt("userId"),
+                        rs.getString("status"),
+                        rs.getString("userName"),
+                        rs.getString("userTag"),
+                        rs.getString("flagOnOff"),
+                        rs.getString("profileImageUrl"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("nitro")
+                ),
+                getPwdParams);
+
+    }
 
 
 }
