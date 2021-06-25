@@ -19,13 +19,10 @@ public class TestController {
 
     @Autowired
     private final TestProvider testProvider;
-    @Autowired
-    private final TestService testService;
 
 
     public TestController(TestProvider testProvider, TestService testService) {
         this.testProvider = testProvider;
-        this.testService = testService;
     }
 
 

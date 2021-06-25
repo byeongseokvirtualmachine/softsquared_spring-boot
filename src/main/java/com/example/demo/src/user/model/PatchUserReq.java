@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class PatchUserReq {
-    private String userId;
+    private int userId;
     private String password;
     private String userName;
     private String userTag;

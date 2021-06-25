@@ -37,6 +37,7 @@ public class UserDao {
     }
 
     public List<GetUserRes> getUsersByEmail(String email) {
+        System.out.println("getUsersByEmail 접근");
         String getUsersByEmailQuery = "select userId, userName, userTag, flagOnOff, profileImageUrl, phone, email, password from User where email =?";
         String getUsersByEmailParams = email;
         return this.jdbcTemplate.query(getUsersByEmailQuery,
@@ -55,6 +56,7 @@ public class UserDao {
     }
 
     public GetUserRes getUser(int userId) {
+        System.out.println("getUser 접근");
         String getUserQuery = "select * from User where userId = ?";
         int getUserParams = userId;
         return this.jdbcTemplate.queryForObject(getUserQuery,
@@ -73,6 +75,7 @@ public class UserDao {
 
 
     public int createUser(PostUserReq postUserReq) {
+        System.out.println("createUser 접근 ");
         String createUserQuery = "insert into User (userId, userName, userTag, email, password) VALUES (?, ?, ?, ?, ?)";
         Object[] createUserParams = new Object[]{postUserReq.getUserId(), postUserReq.getUserName(), postUserReq.getUserTag(), postUserReq.getEmail(), postUserReq.getPassword()};
         this.jdbcTemplate.update(createUserQuery, createUserParams);
@@ -82,6 +85,7 @@ public class UserDao {
     }
 
     public int checkEmail(String email) {
+        System.out.println("checkEmail 접근");
         String checkEmailQuery = "select exists(select email from User where email = ?)";
         String checkEmailParams = email;
         return this.jdbcTemplate.queryForObject(checkEmailQuery,
@@ -97,20 +101,19 @@ public class UserDao {
 //    }
 
     public int modifyUserName(PatchUserNameReq patchUserNameReq) {
+        System.out.println("modifyUserName 접근");
         String modifyUserNameQuery = "update User set userName = ? where userId = ? ";
         Object[] modifyUserNameParams = new Object[]{patchUserNameReq.getUserName(), patchUserNameReq.getUserId()};
-
         return this.jdbcTemplate.update(modifyUserNameQuery, modifyUserNameParams);
     }
 
+    /*
+    new Object[]{postUserReq.getUserId(), postUserReq.getUserName(),postUserReq.getUserTag(), postUserReq.getEmail(), postUserReq.getPassword()};
+     */
     public User getPwd(PostLoginReq postLoginReq) {
-        System.out.println("UserDao getPwd : start");
-        System.out.println("postLoginReq : " + postLoginReq);
+        System.out.println("getPwd 접근");
         String getPwdQuery = "SELECT userId, status, userName, userTag, flagOnOff, profileImageUrl, phone, email, password, nitro FROM User WHERE email = ?";
         String getPwdParams = postLoginReq.getEmail();
-        System.out.println("getPwdQuery : " + getPwdQuery);
-        System.out.println("getPwdParams : " + getPwdParams);
-
         return this.jdbcTemplate.queryForObject(getPwdQuery,
                 (rs, rowNum) -> new User(
                         rs.getInt("userId"),

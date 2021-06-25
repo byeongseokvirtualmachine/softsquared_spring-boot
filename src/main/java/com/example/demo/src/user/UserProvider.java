@@ -2,6 +2,7 @@ package com.example.demo.src.user;
 
 
 import com.example.demo.config.BaseException;
+import com.example.demo.config.BaseResponse;
 import com.example.demo.config.secret.Secret;
 import com.example.demo.src.user.model.*;
 import com.example.demo.utils.AES128;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.example.demo.config.BaseResponseStatus.*;
+import static com.example.demo.utils.ValidationRegex.isRegexEmail;
 
 //Provider : Read의 비즈니스 로직 처리
 @Service
@@ -57,7 +59,8 @@ public class UserProvider {
             System.out.println("UserProvider getUserRes : " + getUserRes);
             return getUserRes;
         } catch (Exception exception) {
-            System.out.println("Provider exception.printStackTrace(): " + exception);
+            System.out.println("Provider getUser exception.printStackTrace(): ");
+            exception.printStackTrace();
             throw new BaseException(DATABASE_ERROR);
         }
     }
@@ -66,35 +69,32 @@ public class UserProvider {
         try {
             return userDao.checkEmail(email);
         } catch (Exception exception) {
+            System.out.println("Provider checkEmail exception.printStackTrace(): ");
+            exception.printStackTrace();
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
-
+    public PostLoginRes login(PostLoginReq postLoginReq) throws BaseException {
+        System.out.println("UserProvider login first");
         User user = userDao.getPwd(postLoginReq);
-        System.out.println("UserProvider user : " + user);
         String password;
-        System.out.println("UserProvider user : " + user);
         try {
             password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword());
-            System.out.println("UserProvider password : " + password);
-        } catch (Exception ignored) {
-            System.out.println("UserProvider ignored : ");
-            ignored.printStackTrace();
+        } catch (Exception exception) {
+            System.out.println("Provider LogIn exception.printStackTrace(): ");
+            exception.printStackTrace();
             throw new BaseException(PASSWORD_DECRYPTION_ERROR);
         }
 
         if (postLoginReq.getPassword().equals(password)) {
+            System.out.println("ID 일치!");
             int userId = userDao.getPwd(postLoginReq).getUserId();
             String jwt = jwtService.createJwt(userId);
-            System.out.println("UserProvider userId : " + userId);
-            System.out.println("UserProvider jwt : " + jwt);
             return new PostLoginRes(userId, jwt);
         } else {
             throw new BaseException(FAILED_TO_LOGIN);
         }
 
     }
-
 }

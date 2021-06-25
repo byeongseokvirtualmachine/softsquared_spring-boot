@@ -1,7 +1,6 @@
 package com.example.demo.src.user;
 
 
-
 import com.example.demo.config.BaseException;
 import com.example.demo.config.secret.Secret;
 import com.example.demo.src.user.model.*;
@@ -38,12 +37,15 @@ public class UserService {
     // POST
     public PostUserRes createUser(PostUserReq postUserReq) throws BaseException {
         //중복
-        if(userProvider.checkEmail(postUserReq.getEmail()) ==1){
+        if (userProvider.checkEmail(postUserReq.getEmail()) == 0) {
+            System.out.println("이메일이 비어있구나!");
+        }
+        else if (userProvider.checkEmail(postUserReq.getEmail()) == 1) {
             throw new BaseException(POST_USERS_EXISTS_EMAIL);
         }
 
         String pwd;
-        try{
+        try {
             //암호화
             pwd = new AES128(Secret.USER_INFO_PASSWORD_KEY).encrypt(postUserReq.getPassword());
             System.out.println("UserService pwd : " + pwd);
@@ -55,27 +57,21 @@ public class UserService {
             int userId = userDao.createUser(postUserReq);
             //jwt 발급.
             String jwt = jwtService.createJwt(userId);
-            System.out.println("User Service jwt : " + jwt);
-            System.out.println("User Service userId : " + userId);
-            PostUserRes PUR= new PostUserRes(userId,jwt);
-            System.out.println("UserService PostUserRes(jwt, userId) : " + PUR);
-            return PUR; // 그냥 값을 보고 싶어서 생성한 PUR.
+            System.out.println("User Service jwt : " + jwt + "\nUser Service userId : " + userId);
+            return new PostUserRes(userId, jwt);
         } catch (Exception exception) {
-            System.out.println("UserService exception.printStackTrace() : ");
-            System.out.print("that's no error message.");
-            exception.printStackTrace();
-            System.out.println("UserService exception.printStackTrace() done.");
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
     public void modifyUserName(PatchUserNameReq patchUserNameReq) throws BaseException {
-        try{
+        try {
             int result = userDao.modifyUserName(patchUserNameReq);
-            if(result == 0){
+            System.out.println("UserService bring me here");
+            if (result == 0) {
                 throw new BaseException(MODIFY_FAIL_USERNAME);
             }
-        } catch(Exception exception){
+        } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }

@@ -43,7 +43,6 @@ public class JwtService {
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
         return request.getHeader("X-ACCESS-TOKEN");
     }
-
     /*
     JWT에서 userId 추출
     @return int
@@ -66,7 +65,7 @@ public class JwtService {
             throw new BaseException(INVALID_JWT);
         }
 
-        // 3. userIdx 추출
+        // 3. userId 추출
         return claims.getBody().get("userId",Integer.class);
     }
 
