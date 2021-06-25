@@ -128,6 +128,7 @@ public class UserController {
             // TODO: 로그인 값들에 대한 형식적인 validatin 처리해주셔야합니다!
             // TODO: 유저의 status ex) 비활성화된 유저, 탈퇴한 유저 등을 관리해주고 있다면 해당 부분에 대한 validation 처리도 해주셔야합니다.
             PostLoginRes postLoginRes = userProvider.login(postLoginReq);
+            System.out.println("10. postLoginRes에 userId, jwt 값 확인 " + postLoginRes);
             return new BaseResponse<>(postLoginRes);
         } catch (BaseException exception) {
             System.out.println("userController exception.printStackTrace() : ");

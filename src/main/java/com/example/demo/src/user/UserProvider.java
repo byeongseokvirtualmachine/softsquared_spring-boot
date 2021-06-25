@@ -76,11 +76,13 @@ public class UserProvider {
     }
 
     public PostLoginRes login(PostLoginReq postLoginReq) throws BaseException {
-        System.out.println("UserProvider login first");
+        System.out.println("3. UserProvider login first");
         User user = userDao.getPwd(postLoginReq);
         String password;
         try {
+            System.out.println("5. 패스워드 생성 : ");
             password = new AES128(Secret.USER_INFO_PASSWORD_KEY).decrypt(user.getPassword());
+            System.out.println(password);
         } catch (Exception exception) {
             System.out.println("Provider LogIn exception.printStackTrace(): ");
             exception.printStackTrace();
@@ -88,8 +90,10 @@ public class UserProvider {
         }
 
         if (postLoginReq.getPassword().equals(password)) {
-            System.out.println("ID 일치!");
+            System.out.println("6. ID 일치!");
             int userId = userDao.getPwd(postLoginReq).getUserId();
+            System.out.println("8. getPwd 두 번 가서 유저 아이디 주입");
+            System.out.println("9. jwt 생성 전 userId 확인 : " + userId);
             String jwt = jwtService.createJwt(userId);
             return new PostLoginRes(userId, jwt);
         } else {

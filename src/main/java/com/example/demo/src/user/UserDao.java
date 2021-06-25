@@ -111,7 +111,7 @@ public class UserDao {
     new Object[]{postUserReq.getUserId(), postUserReq.getUserName(),postUserReq.getUserTag(), postUserReq.getEmail(), postUserReq.getPassword()};
      */
     public User getPwd(PostLoginReq postLoginReq) {
-        System.out.println("getPwd 접근");
+        System.out.println("4. getPwd 접근 7. 성공시 getPwd 접근");
         String getPwdQuery = "SELECT userId, status, userName, userTag, flagOnOff, profileImageUrl, phone, email, password, nitro FROM User WHERE email = ?";
         String getPwdParams = postLoginReq.getEmail();
         return this.jdbcTemplate.queryForObject(getPwdQuery,
