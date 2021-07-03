@@ -36,7 +36,7 @@ public class ChannelProvider {
 
     public List<GetChannelRes> getChannel() throws BaseException {
         try {
-            List<GetChannelRes> getChannelRes = channelDao.getChannel();
+            List<GetChannelRes> getChannelRes = channelDao.getChannels();
             return getChannelRes;
         } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);

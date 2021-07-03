@@ -33,6 +33,18 @@ public class UserProvider {
         this.jwtService = jwtService;
     }
 
+    public GetUserRes getUser(int userId) throws BaseException {
+        System.out.println("UserProvider userId : " + userId);
+        try {
+            GetUserRes getUserRes = userDao.getUser(userId);
+            System.out.println("UserProvider getUserRes : " + getUserRes);
+            return getUserRes;
+        } catch (Exception exception) {
+            System.out.println("Provider getUser exception.printStackTrace(): ");
+            exception.printStackTrace();
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
     public List<GetUserRes> getUsers() throws BaseException {
         try {
             List<GetUserRes> getUserRes = userDao.getUsers();
@@ -52,18 +64,6 @@ public class UserProvider {
     }
 
 
-    public GetUserRes getUser(int userId) throws BaseException {
-        System.out.println("UserProvider userId : " + userId);
-        try {
-            GetUserRes getUserRes = userDao.getUser(userId);
-            System.out.println("UserProvider getUserRes : " + getUserRes);
-            return getUserRes;
-        } catch (Exception exception) {
-            System.out.println("Provider getUser exception.printStackTrace(): ");
-            exception.printStackTrace();
-            throw new BaseException(DATABASE_ERROR);
-        }
-    }
 
     public int checkEmail(String email) throws BaseException {
         try {

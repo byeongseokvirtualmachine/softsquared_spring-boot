@@ -20,6 +20,25 @@ public class UserDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
+    public GetUserRes getUser(int userId) {
+        System.out.println("getUser 접근");
+        String getUserQuery = "select * from User where userId = ?";
+        int getUserParams = userId;
+        return this.jdbcTemplate.queryForObject(getUserQuery,
+                (rs, rowNum) -> new GetUserRes(
+                        rs.getInt("userId"),
+                        rs.getString("status"),
+                        rs.getString("userName"),
+                        rs.getString("userTag"),
+                        rs.getString("flagOnOff"),
+                        rs.getString("profileImageUrl"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("password")),
+                getUserParams);
+    }
+
     public List<GetUserRes> getUsers() {
         String getUsersQuery = "select * from User";
         return this.jdbcTemplate.query(getUsersQuery,
@@ -55,23 +74,6 @@ public class UserDao {
 
     }
 
-    public GetUserRes getUser(int userId) {
-        System.out.println("getUser 접근");
-        String getUserQuery = "select * from User where userId = ?";
-        int getUserParams = userId;
-        return this.jdbcTemplate.queryForObject(getUserQuery,
-                (rs, rowNum) -> new GetUserRes(
-                        rs.getInt("userId"),
-                        rs.getString("status"),
-                        rs.getString("userName"),
-                        rs.getString("userTag"),
-                        rs.getString("flagOnOff"),
-                        rs.getString("profileImageUrl"),
-                        rs.getString("phone"),
-                        rs.getString("email"),
-                        rs.getString("password")),
-                getUserParams);
-    }
 
 
     public int createUser(PostUserReq postUserReq) {

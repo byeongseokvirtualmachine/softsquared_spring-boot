@@ -21,8 +21,8 @@ public class ChannelDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<GetChannelRes> getChannel() {
-        String getChannelQuery = "select * from Channel ";
+    public List<GetChannelRes> getChannels() {
+        String getChannelQuery = "select * from Channel C inner join Servers S on C.serverId = S.serverId  where serverId = ?";
         return this.jdbcTemplate.query(getChannelQuery,
                 (rs, rowNum) -> new GetChannelRes(
                         rs.getInt("chId"),
