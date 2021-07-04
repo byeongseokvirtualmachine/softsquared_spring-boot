@@ -1,4 +1,4 @@
-package com.example.demo.src.category.model;
+package com.example.demo.src.channel.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

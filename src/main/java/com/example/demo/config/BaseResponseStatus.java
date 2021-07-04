@@ -42,7 +42,8 @@ public enum BaseResponseStatus {
     // [PATCH] /users
     POST_USERS_EXISTS_TAG(false,3015,"중복된 태그입니다."),
 
-
+//     [POST] /channels/mate/add
+    POST_MATE_EXISTS_ALREADY(false,3020, "이미 등록된 친구입니다."),
 
     /**
      * 4000 : Database, Server 오류
