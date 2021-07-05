@@ -2,8 +2,8 @@ com/example/demo/src/servers/model/PostServersRes.java
  com.example.demo.src.servers.model.PostServersRes
 com/example/demo/src/category/CategoryController.java
  com.example.demo.src.category.CategoryController
-com/example/demo/src/channel/model/PostChannelRes.java
- com.example.demo.src.channel.model.PostChannelRes
+com/example/demo/src/test/TestProvider.java
+ com.example.demo.src.test.TestProvider
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
 com/example/demo/src/channel/ChannelDao.java
@@ -16,16 +16,16 @@ com/example/demo/utils/ValidationRegex.java
  com.example.demo.utils.ValidationRegex
 com/example/demo/src/servers/ServersService.java
  com.example.demo.src.servers.ServersService
-com/example/demo/DemoApplication.java
- com.example.demo.DemoApplication
+com/example/demo/config/BaseResponseStatus.java
+ com.example.demo.config.BaseResponseStatus
 com/example/demo/src/channel/model/GetChannelRes.java
  com.example.demo.src.channel.model.GetChannelRes
 com/example/demo/src/user/model/PatchUserNameReq.java
  com.example.demo.src.user.model.PatchUserNameReq
 com/example/demo/src/category/CategoryProvider.java
  com.example.demo.src.category.CategoryProvider
-com/example/demo/src/channel/ChannelController.java
- com.example.demo.src.channel.ChannelController
+com/example/demo/src/channel/ChannelProvider.java
+ com.example.demo.src.channel.ChannelProvider
 com/example/demo/src/servers/model/GetServerRes.java
  com.example.demo.src.servers.model.GetServerRes
 com/example/demo/src/category/CategoryService.java
@@ -34,32 +34,36 @@ com/example/demo/src/test/TestDao.java
  com.example.demo.src.test.TestDao
 com/example/demo/config/secret/Secret.java
  com.example.demo.config.secret.Secret
-com/example/demo/src/mate/model/GetMateRes.java
- com.example.demo.src.mate.model.GetMateRes
+com/example/demo/src/user/UserProvider.java
+ com.example.demo.src.user.UserProvider
 com/example/demo/src/test/TestService.java
  com.example.demo.src.test.TestService
 com/example/demo/src/user/model/PostUserRes.java
  com.example.demo.src.user.model.PostUserRes
-com/example/demo/src/channel/model/Category.java
- com.example.demo.src.channel.model.Category
-com/example/demo/src/mate/model/Mate.java
- com.example.demo.src.mate.model.Mate
+com/example/demo/config/BaseResponse.java
+ com.example.demo.config.BaseResponse
+com/example/demo/src/user/UserService.java
+ com.example.demo.src.user.UserService
 com/example/demo/src/servers/ServersDao.java
  com.example.demo.src.servers.ServersDao
-com/example/demo/src/servers/model/PostServersReq.java
- com.example.demo.src.servers.model.PostServersReq
-com/example/demo/src/user/model/GetUserRes.java
- com.example.demo.src.user.model.GetUserRes
-com/example/demo/src/user/model/PostLoginReq.java
- com.example.demo.src.user.model.PostLoginReq
+com/example/demo/config/BaseException.java
+ com.example.demo.config.BaseException
+com/example/demo/src/servers/ServersProvider.java
+ com.example.demo.src.servers.ServersProvider
+com/example/demo/utils/JwtService.java
+ com.example.demo.utils.JwtService
 com/example/demo/src/category/CategoryDao.java
  com.example.demo.src.category.CategoryDao
+com/example/demo/src/mate/model/GetMateIdRes.java
+ com.example.demo.src.mate.model.GetMateIdRes
 com/example/demo/src/channel/ChannelService.java
  com.example.demo.src.channel.ChannelService
 com/example/demo/src/user/model/PostUserReq.java
  com.example.demo.src.user.model.PostUserReq
 com/example/demo/src/test/model/Test.java
  com.example.demo.src.test.model.Test
+com/example/demo/src/mate/model/PostMateRes.java
+ com.example.demo.src.mate.model.PostMateRes
 com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
 com/example/demo/src/servers/model/Servers.java
@@ -72,38 +76,36 @@ com/example/demo/src/user/model/PatchUserReq.java
  com.example.demo.src.user.model.PatchUserReq
 com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
-com/example/demo/src/user/model/User.java
- com.example.demo.src.user.model.User
-com/example/demo/src/channel/model/Channel.java
- com.example.demo.src.channel.model.Channel
-com/example/demo/src/channel/ChannelProvider.java
- com.example.demo.src.channel.ChannelProvider
-com/example/demo/src/test/TestProvider.java
- com.example.demo.src.test.TestProvider
-com/example/demo/src/test/TestController.java
- com.example.demo.src.test.TestController
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
-com/example/demo/src/user/UserController.java
- com.example.demo.src.user.UserController
-com/example/demo/config/BaseResponse.java
- com.example.demo.config.BaseResponse
-com/example/demo/src/mate/model/PostMateRes.java
- com.example.demo.src.mate.model.PostMateRes
-com/example/demo/src/user/UserService.java
- com.example.demo.src.user.UserService
-com/example/demo/config/BaseResponseStatus.java
- com.example.demo.config.BaseResponseStatus
-com/example/demo/config/BaseException.java
- com.example.demo.config.BaseException
-com/example/demo/src/servers/ServersProvider.java
- com.example.demo.src.servers.ServersProvider
 com/example/demo/src/servers/ServersController.java
  com.example.demo.src.servers.ServersController
-com/example/demo/utils/JwtService.java
- com.example.demo.utils.JwtService
+com/example/demo/src/test/TestController.java
+ com.example.demo.src.test.TestController
+com/example/demo/src/channel/ChannelController.java
+ com.example.demo.src.channel.ChannelController
 com/example/demo/src/mate/model/PostMateReq.java
  com.example.demo.src.mate.model.PostMateReq
+com/example/demo/src/user/model/PostLoginReq.java
+ com.example.demo.src.user.model.PostLoginReq
+com/example/demo/src/channel/model/PostChannelRes.java
+ com.example.demo.src.channel.model.PostChannelRes
+com/example/demo/src/channel/model/Channel.java
+ com.example.demo.src.channel.model.Channel
+com/example/demo/src/user/UserController.java
+ com.example.demo.src.user.UserController
+com/example/demo/src/mate/model/GetMateRes.java
+ com.example.demo.src.mate.model.GetMateRes
+com/example/demo/src/user/model/User.java
+ com.example.demo.src.user.model.User
+com/example/demo/src/user/model/GetUserRes.java
+ com.example.demo.src.user.model.GetUserRes
+com/example/demo/src/servers/model/PostServersReq.java
+ com.example.demo.src.servers.model.PostServersReq
+com/example/demo/DemoApplication.java
+ com.example.demo.DemoApplication
+com/example/demo/src/mate/model/Mate.java
+ com.example.demo.src.mate.model.Mate
+com/example/demo/src/channel/model/Category.java
+ com.example.demo.src.channel.model.Category
 com/example/demo/src/mate/MateProvider.java
  com.example.demo.src.mate.MateProvider
 com/example/demo/src/mate/MateController.java

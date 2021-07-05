@@ -53,17 +53,19 @@ public class MateProvider {
         }
     }
 
-    public int checkMate(int userId,int mateId) throws BaseException {
+    public int checkMate(int userId, int mateId) throws BaseException {
         System.out.println("친구 확인 중... userId : ");
         System.out.println(userId);
+        System.out.println(mateId);
+
+        if (mateDao.checkMateId(userId, mateId) == 1) {
+            throw new BaseException(POST_MATE_EXISTS_ALREADY);
+        }
         try {
             return mateDao.checkMateId(userId, mateId);
-
         } catch (Exception exception) {
-            System.out.println("친구가 있는지 없는지 확인이 안 됨");
-            exception.printStackTrace();
-            throw new BaseException(DATABASE_ERROR);
+            return 0;
         }
-    }
 
+    }
 }

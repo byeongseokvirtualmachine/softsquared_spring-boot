@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.example.demo.config.BaseResponseStatus.*;
 
@@ -33,18 +34,20 @@ public class MateService {
         System.out.println("중복되는 친구 확인 중");
         if(postMateReq.getMateId() == mateProvider.checkMate(postMateReq.getUserId(), postMateReq.getMateId())){
             throw new BaseException(POST_MATE_EXISTS_ALREADY);
-        }
-        int MateListId, userId, mateId;
-        String status;
-        try {
-            System.out.println("여기까지 도달하는지?");
-            MateListId = mateDao.createMate(postMateReq);
-            userId = postMateReq.getUserId();
-            mateId = postMateReq.getMateId();
-            status = postMateReq.getStatus();
-            return new PostMateRes(MateListId, userId, mateId, status);
-        } catch(Exception exception) {
-            throw new BaseException(DATABASE_ERROR);
+        } else {
+
+            int MateListId, userId, mateId;
+            String status;
+            try {
+                System.out.println("여기까지 도달하는지?");
+                MateListId = mateDao.createMate(postMateReq);
+                userId = postMateReq.getUserId();
+                mateId = postMateReq.getMateId();
+                status = postMateReq.getStatus();
+                return new PostMateRes(MateListId, userId, mateId, status);
+            } catch(Exception exception) {
+                throw new BaseException(DATABASE_ERROR);
+            }
         }
 
 
