@@ -2,8 +2,8 @@ com/example/demo/src/servers/model/PostServersRes.java
  com.example.demo.src.servers.model.PostServersRes
 com/example/demo/src/category/CategoryController.java
  com.example.demo.src.category.CategoryController
-com/example/demo/src/test/TestProvider.java
- com.example.demo.src.test.TestProvider
+com/example/demo/src/mate/MateProvider.java
+ com.example.demo.src.mate.MateProvider
 com/example/demo/config/Constant.java
  com.example.demo.config.Constant
 com/example/demo/src/channel/ChannelDao.java
@@ -34,8 +34,8 @@ com/example/demo/src/test/TestDao.java
  com.example.demo.src.test.TestDao
 com/example/demo/config/secret/Secret.java
  com.example.demo.config.secret.Secret
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
+com/example/demo/src/mate/MateController.java
+ com.example.demo.src.mate.MateController
 com/example/demo/src/test/TestService.java
  com.example.demo.src.test.TestService
 com/example/demo/src/user/model/PostUserRes.java
@@ -50,8 +50,8 @@ com/example/demo/config/BaseException.java
  com.example.demo.config.BaseException
 com/example/demo/src/servers/ServersProvider.java
  com.example.demo.src.servers.ServersProvider
-com/example/demo/utils/JwtService.java
- com.example.demo.utils.JwtService
+com/example/demo/src/mate/MateService.java
+ com.example.demo.src.mate.MateService
 com/example/demo/src/category/CategoryDao.java
  com.example.demo.src.category.CategoryDao
 com/example/demo/src/mate/model/GetMateIdRes.java
@@ -76,8 +76,8 @@ com/example/demo/src/user/model/PatchUserReq.java
  com.example.demo.src.user.model.PatchUserReq
 com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
-com/example/demo/src/servers/ServersController.java
- com.example.demo.src.servers.ServersController
+com/example/demo/src/mate/MateDao.java
+ com.example.demo.src.mate.MateDao
 com/example/demo/src/test/TestController.java
  com.example.demo.src.test.TestController
 com/example/demo/src/channel/ChannelController.java
@@ -106,11 +106,11 @@ com/example/demo/src/mate/model/Mate.java
  com.example.demo.src.mate.model.Mate
 com/example/demo/src/channel/model/Category.java
  com.example.demo.src.channel.model.Category
-com/example/demo/src/mate/MateProvider.java
- com.example.demo.src.mate.MateProvider
-com/example/demo/src/mate/MateController.java
- com.example.demo.src.mate.MateController
-com/example/demo/src/mate/MateDao.java
- com.example.demo.src.mate.MateDao
-com/example/demo/src/mate/MateService.java
- com.example.demo.src.mate.MateService
+com/example/demo/src/servers/ServersController.java
+ com.example.demo.src.servers.ServersController
+com/example/demo/utils/JwtService.java
+ com.example.demo.utils.JwtService
+com/example/demo/src/user/UserProvider.java
+ com.example.demo.src.user.UserProvider
+com/example/demo/src/test/TestProvider.java
+ com.example.demo.src.test.TestProvider

@@ -35,14 +35,23 @@ public class ServersController {
         this.jwtService = jwtService;
     }
 
-    @ResponseBody // 이건 된거네 ?
-    @GetMapping("/servers") // (GET) 127.0.0.1:9000/app/users
-    public BaseResponse<List<GetServerRes>> getServers() {
-        try {
-            List<GetServerRes> getServerRes = serversProvider.getServers();
-            return new BaseResponse<>(getServerRes);
-        } catch (BaseException exception) {
-            return new BaseResponse<>((exception.getStatus()));
-        }
-    }
+//    @ResponseBody // 이건 된거네 ?
+//    @GetMapping("/servers") // (GET) 127.0.0.1:9000/app/users
+//    public BaseResponse<List<GetServerRes>> getServers() {
+//
+//        try {
+//            String accessToken = jwtService.getJwt(); // jwt 를 입력해 주세요.
+//            if ( ) {
+//
+//                return new BaseResponse<>(INVALID_USER_JWT);
+//            }
+//            }
+//        try {
+//            List<GetServerRes> getServerRes = serversProvider.getServers();
+//            return new BaseResponse<>(getServerRes);
+//        } catch (BaseException exception) {
+//
+//            return new BaseResponse<>((exception.getStatus()));
+//        }
+//    }
 }
