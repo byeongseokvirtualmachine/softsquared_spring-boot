@@ -62,7 +62,7 @@ public class MateController {
      */
     //Query String
     @ResponseBody
-    @GetMapping("/{userId}") // (GET) 127.0.0.1:9000/app/users
+    @GetMapping("/{userId}") // (GET) 127.0.0.1:9000/channels/mate/:userId
     public BaseResponse<GetMateRes> getMate(@RequestParam("userId") int userId) {
         // Get Mate
         System.out.println("getMate 시작");

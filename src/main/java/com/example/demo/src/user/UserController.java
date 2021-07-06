@@ -136,6 +136,8 @@ public class UserController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
+
+
     /**
      * 유저정보변경 API
      * [PATCH] /app/:userId
